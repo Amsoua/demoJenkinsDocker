@@ -1,8 +1,6 @@
 package com.tuto.docker.jenkins.demo.controller;
 
 import com.tuto.docker.jenkins.demo.entity.Library;
-import com.tuto.docker.jenkins.demo.repository.AuthorRepository;
-import com.tuto.docker.jenkins.demo.repository.BookRepository;
 import com.tuto.docker.jenkins.demo.repository.LibraryRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,14 +12,12 @@ import javax.validation.Valid;
 @RestController
 public class LibraryController {
     private final LibraryRepository libraryRepository;
-    private final BookRepository bookRepository;
-    private final AuthorRepository authorRepository;
 
-    public LibraryController(LibraryRepository libraryRepository, BookRepository bookRepository, AuthorRepository authorRepository) {
+
+    public LibraryController(LibraryRepository libraryRepository) {
 
         this.libraryRepository = libraryRepository;
-        this.bookRepository = bookRepository;
-        this.authorRepository = authorRepository;
+
     }
 
     @GetMapping(value = "/libraries", produces = MediaType.APPLICATION_JSON_VALUE)

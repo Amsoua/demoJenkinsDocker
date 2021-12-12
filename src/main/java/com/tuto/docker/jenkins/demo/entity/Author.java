@@ -2,16 +2,16 @@ package com.tuto.docker.jenkins.demo.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
+@Entity
 @Getter
 @Setter
+@ToString
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,7 +21,14 @@ public class Author {
     @NotEmpty
     private String email;
     private String address;
-    @ManyToMany(mappedBy = "authorsOfBooks")
+    @ManyToMany(mappedBy = "author")
     private List<Book> listBooks;
 
+    public Author(Long idAuthor, @NotEmpty String name, @NotEmpty String email, String address, List<Book> listBooks) {
+        this.idAuthor = idAuthor;
+        this.name = name;
+        this.email = email;
+        this.address = address;
+        this.listBooks = listBooks;
+    }
 }

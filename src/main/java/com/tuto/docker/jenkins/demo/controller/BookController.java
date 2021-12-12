@@ -18,17 +18,17 @@ public class BookController {
         this.bookRepository = bookRepository;
     }
 
-    @GetMapping(value = "/libraries", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/books", produces = MediaType.APPLICATION_JSON_VALUE)
     public Iterable<Book> getLibraries() {
         return bookRepository.findAll();
     }
 
-    @GetMapping(value = "/library/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/book/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Book getBook(@PathVariable long id){
         return bookRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Invalid library id %s", id)));
     }
 
-    @PostMapping(value = "/library", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/book", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Book createBook(@Valid @RequestBody Book library) {
         return bookRepository.save(library);
     }

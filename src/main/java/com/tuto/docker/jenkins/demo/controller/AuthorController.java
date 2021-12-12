@@ -20,17 +20,17 @@ public class AuthorController {
         this.authorRepository = authorRepository;
     }
 
-    @GetMapping(value = "/libraries", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/authors", produces = MediaType.APPLICATION_JSON_VALUE)
     public Iterable<Author> getLibraries() {
         return authorRepository.findAll();
     }
 
-    @GetMapping(value = "/Author/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/author/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Author getAuthor(@PathVariable long id){
         return authorRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Invalid Author id %s", id)));
     }
 
-    @PostMapping(value = "/Author", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/author", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Author createAuthor(@Valid @RequestBody Author Author) {
         return authorRepository.save(Author);
     }
