@@ -15,7 +15,7 @@ pipeline {
         stage ('Clean') {
            steps {
                 echo "Cleaning up...."
-                sh 'mvn -Dmaven.test.failure.ignore=true install'
+                sh 'mvn clean'
            }
         }
        stage('Build') {
@@ -29,7 +29,7 @@ pipeline {
    stage('Test') {
          steps {
             echo 'Testing...'
-            sh 'mvn -Dmaven.test.failure.ignore=true test'
+            sh 'mvn test'
         }
    }
    stage('Deploy') {
