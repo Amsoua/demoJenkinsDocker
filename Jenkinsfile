@@ -1,4 +1,9 @@
 pipeline {
+    environment {
+        imagename = "amsoua/demoJenkenDocker"
+        registryCredential = 'docker-hub-token'
+        dockerImage = ''
+      }
    agent any
    tools {
         maven 'Maven 3.8.4'
@@ -37,5 +42,36 @@ pipeline {
        echo 'Deploying...'
      }
    }
+   stage('Cloning Git') {
+         steps {
+           git([url: 'https://github.com/Amsoua/demoJenkinsDocker.git', branch: 'master', credentialsId: 'amousa-token-demo'])
+
+         }
+       }
+       stage('Building image') {
+         steps{
+           script {
+             dockerImage = docker.build imagename
+           }
+         }
+       }
+       stage('Deploy Image') {
+         steps{
+           script {
+             docker.withRegistry( '', registryCredential ) {
+               dockerImage.push("$BUILD_NUMBER")
+                dockerImage.push('latest')
+
+             }
+           }
+         }
+       }
+       stage('Remove Unused docker image') {
+         steps{
+           sh "docker rmi $imagename:$BUILD_NUMBER"
+            sh "docker rmi $imagename:latest"
+
+         }
+       }
   }
 }
