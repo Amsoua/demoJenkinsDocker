@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        imagename = "amsoua/demoJenkenDocker"
+        imagename = "amsoua/demo"
         registryCredential = 'docker-hub-token'
         dockerImage = ''
       }
