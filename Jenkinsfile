@@ -7,7 +7,6 @@ pipeline {
    agent any
    tools {
         maven 'Maven 3.8.4'
-        docker 'docker'
     }
    stages {
        stage ('Initialize') {
@@ -16,6 +15,8 @@ pipeline {
                    echo "PATH = ${PATH}"
                    echo "M2_HOME = ${M2_HOME}"
                '''
+               def dockerHome = tool 'docker'
+               env.PATH = "${dockerHome}/bin:${env.PATH}"
           }
         }
         stage ('Clean') {
