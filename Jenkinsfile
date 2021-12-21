@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        imagename = "amsoua/demo"
+        imagename = "amsoua/demoJenkinsDocker"
         registryCredential = 'docker-hub-token'
         dockerImage = ''
       }
@@ -15,8 +15,6 @@ pipeline {
                    echo "PATH = ${PATH}"
                    echo "M2_HOME = ${M2_HOME}"
                '''
-               def dockerHome = tool 'docker'
-               env.PATH = "${dockerHome}/bin:${env.PATH}"
           }
         }
         stage ('Clean') {
