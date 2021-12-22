@@ -1,13 +1,12 @@
 pipeline {
     environment {
         imagename = "amsoua/demoJenkinsDocker"
-        registryCredential = 'docker-hub-token'
+        registryCredential = 'docker-hub-demo-token'
         dockerImage = ''
       }
    agent any
    tools {
         maven 'Maven 3.8.4'
-        docker 'docker'
     }
    stages {
        stage ('Initialize') {
@@ -45,7 +44,7 @@ pipeline {
    }
    stage('Cloning Git') {
          steps {
-           git([url: 'https://github.com/Amsoua/demoJenkinsDocker.git', branch: 'master', credentialsId: 'amousa-token-demo'])
+           git([url: 'https://github.com/Amsoua/demoJenkinsDocker.git', branch: 'master', credentialsId: 'github-demo-token'])
 
          }
        }
