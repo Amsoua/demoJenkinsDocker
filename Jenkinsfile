@@ -27,7 +27,7 @@ pipeline {
            steps {
               echo 'Building...'
               echo "Running ${env.BUILD_ID} ${env.BUILD_DISPLAY_NAME} on ${env.NODE_NAME} and JOB ${env.JOB_NAME}"
-              withSonarQubeEnv(installationName: 'Demo SonarQubeScanner', credentialsId: 'Sonar_Token') {
+              withSonarQubeEnv(installationName: 'SonarQube', credentialsId: 'Sonar_Token') {
                  sh 'mvn -Dmaven.test.failure.ignore=true -DskipTests=true install sonar:sonar'
              }
           }
