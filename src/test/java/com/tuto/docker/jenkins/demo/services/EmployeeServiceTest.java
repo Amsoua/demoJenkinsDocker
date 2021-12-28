@@ -85,7 +85,7 @@ class EmployeeServiceTest {
     {
 
         Employee employee = new Employee(2,"Lokesh","Gupta");
-        when(dao.findByFirstname(Mockito.anyString())).thenReturn(Optional.of(employee));
+        when(dao.findByFirstName(Mockito.anyString())).thenReturn(Optional.of(employee));
         service.save(employee);
         verify(dao, times(1)).save(employee);
 
@@ -96,7 +96,7 @@ class EmployeeServiceTest {
     {
 
         Employee employee = new Employee(2,"Lokesh","Gupta");
-        when(dao.findByFirstname(Mockito.anyString())).thenReturn(Optional.empty());
+        when(dao.findByFirstName(Mockito.anyString())).thenReturn(Optional.empty());
 
         RecordNotFoundException thrown = assertThrows(
                 RecordNotFoundException.class,

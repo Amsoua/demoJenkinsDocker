@@ -24,7 +24,7 @@ public class EmployeeService {
 			employee = employeeRepository.save(employee);
 			return employee;
 		} else {
-			Optional<Employee> employeeOptional = employeeRepository.findByFirstname(employee.getFirstName());
+			Optional<Employee> employeeOptional = employeeRepository.findByFirstName(employee.getFirstName());
 
 			if (employeeOptional.isPresent()) {
 				Employee newEntity = employeeOptional.get();
