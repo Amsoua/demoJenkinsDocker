@@ -17,18 +17,20 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idAuthor;
     @NotEmpty
-    private String name;
+    private String firstName;
+    @NotEmpty
+    private String lastName;
     @NotEmpty
     private String email;
     private String address;
-    @ManyToMany(mappedBy = "author")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "author")
     private List<Book> listBooks;
 
-    public Author(Long idAuthor, @NotEmpty String name, @NotEmpty String email, String address, List<Book> listBooks) {
-        this.idAuthor = idAuthor;
-        this.name = name;
+    public Author( @NotEmpty String firstName,@NotEmpty String lastName, @NotEmpty String email, String address) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.address = address;
-        this.listBooks = listBooks;
+
     }
 }

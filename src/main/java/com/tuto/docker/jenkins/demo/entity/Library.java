@@ -20,16 +20,14 @@ public class Library {
     private Long id;
     @NotEmpty
     private String name;
-    private String description;
     private String address;
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "books")
     private List<Book> books;
 
-    public Library(Long id, @NotEmpty String name, String description, String address, List<Book> books) {
-        this.id = id;
+    public Library( @NotEmpty String name,  String address) {
+
         this.name = name;
-        this.description = description;
         this.address = address;
-        this.books = books;
+
     }
 }

@@ -6,7 +6,6 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.util.List;
 
 @Entity
 @Getter
@@ -17,14 +16,16 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idBook;
     @NotEmpty
-    private String name;
+    private String title;
     @NotEmpty
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<Author>  author;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Author  author;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Library library;
 
-    public Book(Long idBook, @NotEmpty String name, @NotEmpty List<Author> author) {
-        this.idBook = idBook;
-        this.name = name;
-        this.author = author;
+    public Book(@NotEmpty String title) {
+
+        this.title = title;
+
     }
 }
