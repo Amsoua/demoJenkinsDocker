@@ -19,11 +19,12 @@ public class EmployeeService {
 	EmployeeRepository employeeRepository;
 
 	public Employee save(Employee employee) {
+
 		if (employee.getId() == null) {
 			employee = employeeRepository.save(employee);
 			return employee;
 		} else {
-			Optional<Employee> employeeOptional = employeeRepository.findById(employee.getId());
+			Optional<Employee> employeeOptional = employeeRepository.findByFirstname(employee.getFirstName());
 
 			if (employeeOptional.isPresent()) {
 				Employee newEntity = employeeOptional.get();
@@ -34,7 +35,7 @@ public class EmployeeService {
 
 				return newEntity;
 			} else {
-				throw new RecordNotFoundException("No employee record exist for given id");
+				throw new RecordNotFoundException("No employee record exist for given id "+employee.getId());
 			}
 		}
 	}
@@ -42,10 +43,10 @@ public class EmployeeService {
 	public List<Employee> findAll() {
 		List<Employee> result = (List<Employee>) employeeRepository.findAll();
 
-		if (result.size() > 0) {
+		if (!result.isEmpty()) {
 			return result;
 		} else {
-			return new ArrayList<Employee>();
+			return new ArrayList<>();
 		}
 	}
 
