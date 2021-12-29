@@ -1,5 +1,6 @@
 package com.tuto.docker.jenkins.demo.controller;
 
+import com.tuto.docker.jenkins.demo.dto.EmployeeDto;
 import com.tuto.docker.jenkins.demo.model.Employee;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -19,7 +20,7 @@ public class IntegrationTests {
 
 	@Test
 	public void testCreateReadDelete() {
-		Employee employee = new Employee("Amadou", "SOUANE");
+		EmployeeDto employee = new EmployeeDto("Amadou", "SOUANE");
 
 		Employee employeeResult = employeeController.create(employee);
 

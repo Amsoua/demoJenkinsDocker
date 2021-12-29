@@ -9,8 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class DemoJenkenDockerApplication {
 
-	private static final Logger log =
-			LoggerFactory.getLogger(DemoJenkenDockerApplication.class);
+
 	public static void main(String[] args) {
 		SpringApplication.run(DemoJenkenDockerApplication.class, args);
 	}

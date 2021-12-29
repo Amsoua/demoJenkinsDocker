@@ -2,6 +2,7 @@ package com.tuto.docker.jenkins.demo.controller;
 
 import javax.validation.ValidationException;
 
+import com.tuto.docker.jenkins.demo.dto.EmployeeDto;
 import com.tuto.docker.jenkins.demo.model.Employee;
 import com.tuto.docker.jenkins.demo.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,10 @@ public class EmployeeController {
   EmployeeService employeeService;
 
   @PostMapping("/employee")
-  Employee create(@RequestBody Employee employee)  {
+  Employee create(@RequestBody EmployeeDto dto)  {
+    Employee employee = new Employee();
+    employee.setFirstName(dto.getFirstName());
+    employee.setLastName(dto.getLastName());
     return employeeService.save(employee);
   }
 
@@ -34,7 +38,10 @@ public class EmployeeController {
   }
 
   @PutMapping("/employee")
-  Employee update(@RequestBody Employee employee) {
+  Employee update(@RequestBody EmployeeDto dto) {
+    Employee employee = new Employee();
+    employee.setFirstName(dto.getFirstName());
+    employee.setLastName(dto.getLastName());
     return employeeService.save(employee);
   }
 

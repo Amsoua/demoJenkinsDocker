@@ -1,5 +1,7 @@
 package com.tuto.docker.jenkins.demo.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tuto.docker.jenkins.demo.dto.EmployeeDto;
 import com.tuto.docker.jenkins.demo.model.Employee;
 import com.tuto.docker.jenkins.demo.services.EmployeeService;
 import org.hamcrest.Matchers;
@@ -26,8 +28,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(MockitoJUnitRunner.class)
 @WebMvcTest(EmployeeController.class)
@@ -56,15 +58,17 @@ class EmployeeControllerTest {
     public void testSave() throws Exception {
 
         Employee employee = new Employee("Amadou", "SOUANE");
-        Mockito.when(employeeService.save(employee)).thenReturn(employee);
 
-        String json = "{" +
-                "\"id\":1," +
-                "\"name\":\"my note\"" +
-                "}";
+        //Mockito.when(employeeService.save(employee)).thenReturn(employee);
+        ObjectMapper objectMapper = new ObjectMapper();
+
         mockMvc.perform(put("/employee")
-        .contentType(MediaType.APPLICATION_JSON).content(json))
-                .andExpect(status().isOk());
+                .accept(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(employee))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().is2xxSuccessful())
+                .andDo(print())
+                .andReturn();
 
     }
 
