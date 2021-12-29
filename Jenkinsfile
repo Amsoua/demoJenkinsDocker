@@ -33,15 +33,9 @@ pipeline {
 
           }
        }
-   stage('Deploy') {
-     steps {
-       echo 'Deploying...'
-     }
-   }
-   stage('Cloning Git') {
+       stage('Deploy') {
          steps {
-           git([url: 'https://github.com/Amsoua/demoJenkinsDocker.git', branch: 'master', credentialsId: 'github-demo-token'])
-
+           echo 'Deploying...'
          }
        }
        stage('Building image') {
@@ -69,5 +63,5 @@ pipeline {
 
          }
        }
-  }
+      }
 }
