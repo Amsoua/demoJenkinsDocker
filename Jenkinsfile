@@ -68,7 +68,7 @@ pipeline {
                steps {
                   script {
                      env.PIPELINE_NAMESPACE = "prod"
-                     kubernetesDeploy kubeconfigId: 'docker', configs: 'deployment.yaml'
+                     sh "kubectl apply -f deployment.yaml"
                   }
                }
             }
