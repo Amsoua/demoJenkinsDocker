@@ -64,4 +64,12 @@ pipeline {
          }
        }
       }
+      stage('Deploy on prod') {
+               steps {
+                  script {
+                     env.PIPELINE_NAMESPACE = "prod"
+                     kubernetesDeploy kubeconfigId: 'docker', configs: 'deployment.yaml'
+                  }
+               }
+            }
 }
