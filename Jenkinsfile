@@ -33,11 +33,7 @@ pipeline {
 
           }
        }
-       stage('Deploy') {
-         steps {
-           echo 'Deploying...'
-         }
-       }
+
        stage('Building image') {
          steps{
            script {
@@ -64,6 +60,14 @@ pipeline {
          }
        }
 
+        stage('Remove old deployment on prod') {
+               steps {
+                  script {
+                     sh "kubectl delete services demojenkinsdocker-services"
+                     sh "kubectl delete deploy demojenkinsdocker"
+                  }
+               }
+            }
       stage('Deploy on prod') {
                steps {
                   script {
@@ -71,5 +75,5 @@ pipeline {
                   }
                }
             }
-            }
+   }
 }
