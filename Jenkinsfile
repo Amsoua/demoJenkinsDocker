@@ -63,7 +63,7 @@ pipeline {
         stage('Remove old deployment on prod') {
                steps {
                   script {
-                     sh "kubectl delete services demojenkinsdocker-services"
+                     sh "kubectl delete services demojenkinsdocker-service"
                      sh "kubectl delete deploy demojenkinsdocker"
                   }
                }
