@@ -63,7 +63,7 @@ pipeline {
 
          }
        }
-      }
+
       stage('Deploy on prod') {
                steps {
                   script {
@@ -71,5 +71,6 @@ pipeline {
                      kubernetesDeploy kubeconfigId: 'docker', configs: 'deployment.yaml'
                   }
                }
+            }
             }
 }
