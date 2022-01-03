@@ -67,6 +67,7 @@ pipeline {
       stage('Deploy on prod') {
                steps {
                   script {
+                     sh "kubectl create ns prod"
                      env.PIPELINE_NAMESPACE = "prod"
                      sh "kubectl apply -f deployment.yaml"
                   }
